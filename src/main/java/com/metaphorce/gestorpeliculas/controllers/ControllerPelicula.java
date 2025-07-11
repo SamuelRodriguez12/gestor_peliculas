@@ -25,10 +25,7 @@ public class ControllerPelicula {
     ServicePelicula servicePelicula;
 
     @GetMapping("/peliculas")
-    public ResponseEntity<List<Pelicula>> obtenerPelicula(BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-            throw new DatosNoEncontradosExcepciones("Error al encontrar los datos de la pelicula", bindingResult);
-        }
+    public ResponseEntity<List<Pelicula>> obtenerPelicula(){
         List<Pelicula> pelicula = servicePelicula.getPelicula();
         return ResponseEntity.status(HttpStatus.CREATED).body(pelicula);
     }
