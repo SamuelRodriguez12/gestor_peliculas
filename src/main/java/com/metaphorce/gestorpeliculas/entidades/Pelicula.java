@@ -1,6 +1,7 @@
 package com.metaphorce.gestorpeliculas.entidades;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "peliculas")
@@ -8,13 +9,15 @@ public class Pelicula {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_pelicula;
+    @NotNull(message = "El titulo es obligatorio, no se puede saltar su valor, estar vacio o tener solo espacios")
     private String nombre;
-    private boolean disponible;
+    @NotNull(message = "El estado de la pelicula es obligatorio, no se puede saltar su valor, no puede ser null")
+    private Boolean disponible;
 
     public Pelicula() {
     }
 
-    public Pelicula(Integer idPelicula, String nombre, boolean disponible) {
+    public Pelicula(Integer idPelicula, String nombre, Boolean disponible) {
         this.id_pelicula = idPelicula;
         this.nombre = nombre;
         this.disponible = disponible;
@@ -36,11 +39,12 @@ public class Pelicula {
         this.nombre = nombre;
     }
 
-    public boolean isDisponible() {
+    public Boolean isDisponible() {
         return disponible;
     }
 
-    public void setDisponible(boolean disponible) {
+    public void setDisponible(Boolean disponible) {
         this.disponible = disponible;
     }
+
 }
