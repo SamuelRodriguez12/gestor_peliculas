@@ -39,10 +39,7 @@ public class ControllerPelicula {
     }
 
     @GetMapping("/peliculas/{disponible}")
-    public ResponseEntity<List<Pelicula>> obtenerPeliculaDisponible(@PathVariable("disponible") boolean disponible, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-            throw new DatosNoEncontradosExcepciones("Error al encontrar los datos de de la pelicula", bindingResult);
-        }
+    public ResponseEntity<List<Pelicula>> obtenerPeliculaDisponible(@PathVariable("disponible") boolean disponible){
         List<Pelicula> pelicula = servicePelicula.getPeliculaDisponible(disponible);
         return ResponseEntity.status(HttpStatus.CREATED).body(pelicula);
     }
@@ -57,10 +54,7 @@ public class ControllerPelicula {
     }
 
     @DeleteMapping("/peliculas/{id_pelicula}")
-    public String deletePelicula(@PathVariable("id_pelicula") int id_pelicula, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-            throw new DatosNoEncontradosExcepciones("Error al encontrar los datos de de la pelicula con id: "+id_pelicula, bindingResult);
-        }
+    public String deletePelicula(@PathVariable("id_pelicula") int id_pelicula){
         boolean estado = this.servicePelicula.deletePelicula(id_pelicula);
         return "Se elimino con exito";
     }
